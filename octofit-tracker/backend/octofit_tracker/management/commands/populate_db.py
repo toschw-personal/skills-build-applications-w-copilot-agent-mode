@@ -24,20 +24,20 @@ class Command(BaseCommand):
         # Create teams and assign members
         teams = [Team(**team) for team in test_data['teams']]
         Team.objects.bulk_create(teams)
-        for team, user in zip(teams, users):
-            team.members.add(user)
+        for team in Team.objects.all():
+            team.members.set(User.objects.all())
 
         # Create activities
         activities = [
-            Activity(_id=activity['_id'], user=users[i % len(users)], activity_type=activity['activity_type'], duration=activity['duration'])
-            for i, activity in enumerate(test_data['activities'])
+            Activity(**{**activity, 'user': User.objects.first()})
+            for activity in test_data['activities']
         ]
         Activity.objects.bulk_create(activities)
 
         # Create leaderboard entries
         leaderboard_entries = [
-            Leaderboard(_id=entry['_id'], user=users[i % len(users)], score=entry['score'])
-            for i, entry in enumerate(test_data['leaderboard'])
+            Leaderboard(**{**entry, 'user': User.objects.first()})
+            for entry in test_data['leaderboard']
         ]
         Leaderboard.objects.bulk_create(leaderboard_entries)
 

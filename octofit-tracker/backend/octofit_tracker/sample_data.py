@@ -23,5 +23,25 @@ def create_sample_data():
 
     print("Sample data created successfully!")
 
+def get_test_data():
+    return {
+        "users": [
+            {"username": "john_doe", "email": "john@example.com", "first_name": "John", "last_name": "Doe"},
+            {"username": "jane_smith", "email": "jane@example.com", "first_name": "Jane", "last_name": "Smith"}
+        ],
+        "teams": [
+            {"name": "Team Alpha", "description": "A high-performing team"},
+            {"name": "Team Beta", "description": "A team of beginners"}
+        ],
+        "activities": [
+            {"name": "Running", "description": "Outdoor running activity"},
+            {"name": "Cycling", "description": "Outdoor cycling activity"}
+        ],
+        "workouts": [
+            {"user": "john_doe", "activity": "Running", "duration_minutes": 30, "calories_burned": 300},
+            {"user": "jane_smith", "activity": "Cycling", "duration_minutes": 45, "calories_burned": 450}
+        ]
+    }
+
 if __name__ == "__main__":
     create_sample_data()

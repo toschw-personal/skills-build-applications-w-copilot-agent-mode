@@ -32,10 +32,7 @@ class Command(BaseCommand):
             team.members.add(*User.objects.all())
 
         # Create activities
-        activities = [
-            Activity(**{**activity, 'user': User.objects.first(), 'duration': self.parse_duration(activity['duration'])})
-            for activity in test_data['activities']
-        ]
+        activities = [Activity(**activity) for activity in test_data['activities']]
         Activity.objects.bulk_create(activities)
 
         # Create leaderboard entries
@@ -46,7 +43,15 @@ class Command(BaseCommand):
         Leaderboard.objects.bulk_create(leaderboard_entries)
 
         # Create workouts
-        workouts = [Workout(**workout) for workout in test_data['workouts']]
+        workouts = [
+            Workout(
+                user=User.objects.get(username=workout['user']),
+                activity=Activity.objects.get(name=workout['activity']),
+                duration_minutes=workout['duration_minutes'],
+                calories_burned=workout['calories_burned']
+            )
+            for workout in test_data['workouts']
+        ]
         Workout.objects.bulk_create(workouts)
 
         self.stdout.write(self.style.SUCCESS('Successfully populated the database with test data.'))

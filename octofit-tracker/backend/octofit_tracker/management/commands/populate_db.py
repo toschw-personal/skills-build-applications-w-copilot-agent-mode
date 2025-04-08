@@ -33,7 +33,7 @@ class Command(BaseCommand):
 
         # Create activities
         activities = [
-            Activity(**{**activity, 'user': User.objects.first(), 'duration': timedelta(hours=int(activity['duration'].split(':')[0]), minutes=int(activity['duration'].split(':')[1]))})
+            Activity(**{**activity, 'user': User.objects.first(), 'duration': self.parse_duration(activity['duration'])})
             for activity in test_data['activities']
         ]
         Activity.objects.bulk_create(activities)

@@ -8,7 +8,7 @@ import Workouts from './components/Workouts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import logo from './logo.svg';
-import octofitLogo from '../public/octofitapp-small.png';
+import octofitLogo from '/octofitapp-small.png';
 
 function App() {
   return (

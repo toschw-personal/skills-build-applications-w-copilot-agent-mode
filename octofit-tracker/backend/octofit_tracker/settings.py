@@ -1,10 +1,14 @@
-# Add MongoDB database configuration
+import os
+from pathlib import Path
+
+# Define BASE_DIR for the project
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Add SQLite database configuration
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'octofit_db',
-        'HOST': 'localhost',
-        'PORT': 27017,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -29,7 +33,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'djongo',
     'corsheaders',
     'octofit_tracker',
 ]

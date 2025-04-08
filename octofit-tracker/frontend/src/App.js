@@ -7,8 +7,7 @@ import Users from './components/Users';
 import Workouts from './components/Workouts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import logo from './logo.svg';
-import octofitLogo from '/octofitapp-small.png';
+const octofitLogo = `${process.env.PUBLIC_URL}/octofitapp-small.png`;
 
 function App() {
   return (
